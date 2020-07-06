@@ -16,9 +16,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     Toastr::message('Messages in here', 'Title');
     return view('welcome');
-    
+
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('/admin',function () {
+    Toastr::message('Messages in here', 'Title');
+    return view('admin.dashboard');
+
+});
