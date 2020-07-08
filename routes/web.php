@@ -24,8 +24,19 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::get('/admin',function () {
+Route::get('/backend',function () {
     Toastr::message('Messages in here', 'Title');
-    return view('admin.dashboard');
-
+    return view('backend.dashboard');
 });
+
+
+Route::group(
+    ['as' => 'backend.', 'prefix' => 'backend', 'namespace' => 'Backend'],
+    function (){
+        Route::resource('role', 'RoleController');
+        Route::resource('permission', 'PermissionController');
+        Route::resource('user', 'UserController');
+
+    }
+);
+

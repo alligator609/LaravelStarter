@@ -19,6 +19,8 @@
     {{-- <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css"> --}}
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    @yield('css')
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -40,9 +42,7 @@ to get the desired effect
         <!-- Main Sidebar Container -->
         @include('layouts.backend.partial.sidebar')
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
             @yield('content')
-        </div>
         <!-- /.content-wrapper -->
 
         <!-- Control Sidebar -->
@@ -73,6 +73,8 @@ to get the desired effect
     <script src="{{asset('assets/backend/plugins/toastr/toastr.min.js')}}"></script>
     {{-- <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script> --}}
     {!! Toastr::message() !!}
+
+    @yield('script')
 </body>
 
 </html>
