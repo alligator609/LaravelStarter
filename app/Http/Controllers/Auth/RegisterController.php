@@ -71,7 +71,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        $role = Role::find(3);
+        $role = Role::where('name', 'user')->first();
         $user->attachRole($role);
         return $user;
     }

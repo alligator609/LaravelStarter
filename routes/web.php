@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    Toastr::message('Messages in here', 'Title');
-    return view('welcome');
+    Toastr::success('Messages in here', 'Title', ["positionClass" => "toast-top-right"]);
 
+    return view('welcome');
 });
 
 Auth::routes();
@@ -33,6 +33,10 @@ Route::get('/backend',function () {
 Route::group(
     ['as' => 'backend.', 'prefix' => 'backend', 'namespace' => 'Backend'],
     function (){
+        Route::get('home',function () {
+            Toastr::message('Messages in here', 'Title');
+            return view('backend.dashboard');
+        });
         Route::resource('role', 'RoleController');
         Route::resource('permission', 'PermissionController');
         Route::resource('user', 'UserController');

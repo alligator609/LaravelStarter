@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Role;
+use Brian2694\Toastr\Facades\Toastr;
 
 class RoleController extends BackendController
 {
@@ -14,7 +16,8 @@ class RoleController extends BackendController
      */
     public function index()
     {
-        return view("backend.roles.list");
+        $roles= Role::get();
+        return view("backend.roles.list",compact('roles'));
         
     }
 
@@ -25,7 +28,7 @@ class RoleController extends BackendController
      */
     public function create()
     {
-        //
+        return view("backend.roles.create");
     }
 
     /**
@@ -36,7 +39,9 @@ class RoleController extends BackendController
      */
     public function store(Request $request)
     {
-        //
+        Role::create($request->all());
+        Toastr::success('Role created succesfully', 'Title', ["positionClass" => "toast-top-right"]);
+        return redirect('/backend/role/');
     }
 
     /**
@@ -58,7 +63,8 @@ class RoleController extends BackendController
      */
     public function edit($id)
     {
-        //
+        $role = Role::find($id);
+        return view("backend.roles.edit",compact('role'));
     }
 
     /**
@@ -70,7 +76,11 @@ class RoleController extends BackendController
      */
     public function update(Request $request, $id)
     {
-        //
+      $records = Role::findOrFail($id);
+      $records->fill($request->all());
+      $records->update();
+      Toastr::success('Role updated succesfully', 'Title', ["positionClass" => "toast-top-right"]);
+      return redirect('/backend/role/');
     }
 
     /**
@@ -79,8 +89,23 @@ class RoleController extends BackendController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        
+        $role = Role::find($request->role_id);
+
+        //dd(json_decode($role->users->first()->id));
+        if (empty($role->users->first())) 
+        {
+            $role->delete();
+            Toastr::success('Role deleted succesfully', 'Title', ["positionClass" => "toast-top-right"]);
+            return redirect("/backend/role");
+        }
+        else {
+            Toastr::warning('This role has user assign to it', 'Title', ["positionClass" => "toast-top-right"]);
+            return redirect("/backend/role");
+            
+        }
+
     }
 }

@@ -8,12 +8,12 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>DataTables</h1>
+              <h1>Roles</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">DataTables</li>
+                <li class="breadcrumb-item"><a href="">Home</a></li>
+                <li class="breadcrumb-item active">Roles</li>
               </ol>
             </div>
           </div>
@@ -29,93 +29,56 @@
                       <!-- general form elements -->
                       <div class="card">
                           <div class="card-header">
-                              <h3 class="card-title">CATEGORIES LISTS</h3>
+                              <h3 class="card-title">ROLE LISTS</h3>
+                              <div class="card-tools">
+                              <a href="{{route('backend.role.create')}}" ><button type="button" class="btn btn-block btn-primary btn-sm">Add new</button></a>
+                             
+                              </div>
                           </div>
+                          
                           <!-- /.card-header -->
                           <div class="card-body">
                               <table id="example1" class="table table-bordered table-striped text-center">
                                 <thead>
                                   <tr>
-                                    <th>Rendering engine</th>
-                                    <th>Browser</th>
-                                    <th>Platform(s)</th>
-                                    <th>Engine version</th>
-                                    <th>CSS grade</th>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Display Name</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
                                   </tr>
                                   </thead>
                                   <tfoot>
                                       <tr>
-                                        <th>Rendering engine</th>
-                                        <th>Browser</th>
-                                        <th>Platform(s)</th>
-                                        <th>Engine version</th>
-                                        <th>CSS grade</th>
+                                        <th>No</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Action</th>
                                       </tr>
                                   </tfoot>
                                   <tbody>
-              
-                                    <tr role="row" class="odd">
-                                      <td tabindex="0" class="sorting_1">Gecko</td>
-                                      <td>Firefox 1.0</td>
-                                      <td style="">Win 98+ / OSX.2+</td>
-                                      <td style="">1.7</td>
-                                      <td style="">A</td>
-                                    </tr><tr role="row" class="even">
-                                      <td tabindex="0" class="sorting_1">Gecko</td>
-                                      <td>Firefox 1.5</td>
-                                      <td style="">Win 98+ / OSX.2+</td>
-                                      <td style="">1.8</td>
-                                      <td style="">A</td>
-                                    </tr><tr role="row" class="odd">
-                                      <td tabindex="0" class="sorting_1">Gecko</td>
-                                      <td>Firefox 2.0</td>
-                                      <td style="">Win 98+ / OSX.2+</td>
-                                      <td style="">1.8</td>
-                                      <td style="">A</td>
-                                    </tr><tr role="row" class="even">
-                                      <td tabindex="0" class="sorting_1">Gecko</td>
-                                      <td>Firefox 3.0</td>
-                                      <td style="">Win 2k+ / OSX.3+</td>
-                                      <td style="">1.9</td>
-                                      <td style="">A</td>
-                                    </tr><tr role="row" class="odd">
-                                      <td class="sorting_1" tabindex="0">Gecko</td>
-                                      <td>Camino 1.0</td>
-                                      <td style="">OSX.2+</td>
-                                      <td style="">1.8</td>
-                                      <td style="">A</td>
-                                    </tr><tr role="row" class="even">
-                                      <td class="sorting_1" tabindex="0">Gecko</td>
-                                      <td>Camino 1.5</td>
-                                      <td style="">OSX.3+</td>
-                                      <td style="">1.8</td>
-                                      <td style="">A</td>
-                                    </tr><tr role="row" class="odd">
-                                      <td class="sorting_1" tabindex="0">Gecko</td>
-                                      <td>Netscape 7.2</td>
-                                      <td style="">Win 95+ / Mac OS 8.6-9.2</td>
-                                      <td style="">1.7</td>
-                                      <td style="">A</td>
-                                    </tr><tr role="row" class="even">
-                                      <td class="sorting_1" tabindex="0">Gecko</td>
-                                      <td>Netscape Browser 8</td>
-                                      <td style="">Win 98SE+</td>
-                                      <td style="">1.7</td>
-                                      <td style="">A</td>
-                                    </tr><tr role="row" class="odd">
-                                      <td class="sorting_1" tabindex="0">Gecko</td>
-                                      <td>Netscape Navigator 9</td>
-                                      <td style="">Win 98+ / OSX.2+</td>
-                                      <td style="">1.8</td>
-                                      <td style="">A</td>
-                                    </tr><tr role="row" class="even">
-                                      <td class="sorting_1" tabindex="0">Gecko</td>
-                                      <td>Mozilla 1.0</td>
-                                      <td style="">Win 95+ / OSX.1+</td>
-                                      <td style="">1</td>
-                                      <td style="">A</td>
-                                    </tr></tbody>
+                                    @foreach ($roles as $role)
+                                    <tr>
+                                      <td >{{$loop->iteration}}</td>
+                                      <td>{{$role->name}}</td>
+                                      <td>{{$role->display_name}}</td>
+                                      <td>{{$role->description}}</td>
+                                      <td>
+                                       <a href="{{ route('backend.role.edit', $role->id) }}" class="btn btn-xs btn-default">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
 
+                                                <button type="button" class="btn btn-default" data-roleid={{$role->id}} data-toggle="modal" data-target="#modal-delete">
+                                                  <i class="fa fa-times"></i>
+                                                </button>
+                                              </form>
+              
+                                    </td>
+                                    </tr>
+                                        
+                                    @endforeach
+                                
+                                    </tbody>
                               </table>
                           </div>
                           <!-- /.card-body -->
@@ -130,6 +93,38 @@
       </section>
       <!-- /.content -->
   </div> <!-- Content Wrapper end -->
+
+
+  {{-- modal --}}
+  
+  <div class="modal fade" id="modal-delete">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title test-center">Delete Confirmation </h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="{{ route('backend.role.destroy', $role->id) }}" method="POST">
+            {{ csrf_field() }}
+            {{ method_field('DELETE') }}
+              <p>Do you really want to delete {{$role->name }} role ? </p> 
+              <input type="hidden" name="role_id" id="role_id" value="">
+            
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button  type="submit" class="btn btn-danger">Delete</button>
+        </form>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
 @endsection
 
 @section('css')
@@ -160,5 +155,15 @@
       "responsive": true,
     });
   });
+</script>
+
+<script>
+  
+  $('#modal-delete').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) 
+      var role_id = button.data('roleid') 
+      var modal = $(this)
+      modal.find('.modal-body #role_id').val(role_id);
+})
 </script>
 @endsection

@@ -12,6 +12,12 @@ class User extends Authenticatable
     use LaratrustUserTrait;
     use Notifiable;
 
+    public function role()
+{
+    return $this->belongsTo('App\Role', 'role')->withDefault();
+}
+
+
     /**
      * The attributes that are mass assignable.
      *

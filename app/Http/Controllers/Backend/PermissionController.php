@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Permission;
 
-class PermissionController extends BackendController
-{
+class PermissionController extends BackendController{
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +14,9 @@ class PermissionController extends BackendController
      */
     public function index()
     {
-        //
-    }
+        $permissions= Permission::get();
+        return view("backend.permission.list",compact('permissions'));
+}
 
     /**
      * Show the form for creating a new resource.
