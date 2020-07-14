@@ -71,11 +71,9 @@
                                     
                                       </td>
                                       <td>
-                                      <a href="{{route('backend.permission.edit',$permission->id)}}">
-                                        <button type="button" class="btn btn-default">
+                                        <button type="button" class="btn btn-default" data-epermissionid="{{$permission->id}}" data-epermissionname="{{$permission->name}}" data-epermissiondisplayname="{{$permission->display_name}}" data-epermissiondes="{{$permission->description}}" data-toggle="modal" data-target="#modal-edit">
                                           <i class="fa fa-edit"></i>     
                                         </button>
-                                      </a>
                                                                 
   
                                           <button type="button" class="btn btn-default" data-permissionid="{{$permission->id}}" data-permissionname="{{$permission->name}}" data-toggle="modal" data-target="#modal-delete">

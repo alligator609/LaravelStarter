@@ -40,6 +40,7 @@
                                     <td>Name</td>
                                     <td>Email</td>
                                     <td>Role</td>
+                                    <td>Permissions</td>
                                   </tr>
                                   </thead>
                                   <tfoot>
@@ -48,6 +49,7 @@
                                         <td>Name</td>
                                         <td>Email</td>
                                         <td>Role</td>
+                                        <td>Permissions</td>
                                       </tr>
                                   </tfoot>
                                   <tbody>
@@ -65,6 +67,12 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->roles->first()->display_name }}</td>
+                <td>
+                  @foreach ($user->allPermissions() as $item)                    
+                      {{ $loop->first ? '' : ', ' }}
+                      {{$item->name}}
+                  @endforeach                             
+                </td>
             </tr>
 
             @endforeach

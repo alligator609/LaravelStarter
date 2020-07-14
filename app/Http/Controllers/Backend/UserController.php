@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
 use App\User;
 use App\Role;
 
@@ -17,7 +18,6 @@ class UserController extends Controller
     public function index()
     {
         $users  = User::orderBy('id')->get();
-        // dd($users);
         return view("backend.users.list",compact('users'));
     }
 

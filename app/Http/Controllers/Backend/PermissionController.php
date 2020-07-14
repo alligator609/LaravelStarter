@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Permission;
+use App\Role;
+use Brian2694\Toastr\Facades\Toastr;
 
 class PermissionController extends BackendController{
     /**
@@ -15,7 +17,8 @@ class PermissionController extends BackendController{
     public function index()
     {
         $permissions= Permission::get();
-        return view("backend.permission.list",compact('permissions'));
+        $roles= Role::get();
+        return view("backend.permission.list",compact('permissions','roles'));
 }
 
     /**
@@ -36,7 +39,14 @@ class PermissionController extends BackendController{
      */
     public function store(Request $request)
     {
-        //
+        $permission= Permission::create($request->all(['name','display_name','description']));
+        foreach ($request->roles as $key => $value) {
+            $role = Role::whereId($value)->first();           
+            $role->detachPermissions([ $permission->name]);
+            $role->attachPermissions([ $permission->name]);
+        }
+        Toastr::success('Permission created succesfully', 'Title', ["positionClass" => "toast-top-right"]);
+        return redirect('/backend/permission/');
     }
 
     /**
@@ -58,7 +68,9 @@ class PermissionController extends BackendController{
      */
     public function edit($id)
     {
-        //
+        $permission= Permission::findorfail($id);
+        $roles= Role::get();
+        return view("backend.permission.edit",compact('permission','roles'));
     }
 
     /**
@@ -69,8 +81,22 @@ class PermissionController extends BackendController{
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    { 
+        
+        $permission = Permission::findOrFail($id);
+        //detach first
+        $roles= Role::get();
+        foreach ($roles as $key => $value) {        
+            $value->detachPermissions([ $permission->name]);
+        }
+
+        $permission->update($request->all()); //update
+        foreach ($request->roles as $key => $value) {
+            $role = Role::whereId($value)->first();           
+            $role->attachPermissions([ $permission->name]);
+        }
+        Toastr::success('Permission edited succesfully', 'Edited succesfully', ["positionClass" => "toast-top-right"]);
+        return redirect('/backend/permission/');
     }
 
     /**
@@ -79,8 +105,18 @@ class PermissionController extends BackendController{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        
+        $permission = Permission::find($request->permission_id);
+       // dd(json_decode($permission->roles));
+
+        foreach ($permission->roles as $key => $value) {
+            $role = Role::whereId($value->id)->first();           
+            $role->detachPermissions([ $permission->name]);
+        }
+        $permission->delete();
+        Toastr::success('Permission deleted succesfully', 'Title', ["positionClass" => "toast-top-right"]);
+        return redirect("/backend/permission");
     }
 }

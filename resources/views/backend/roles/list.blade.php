@@ -68,10 +68,10 @@
                                                 <i class="fa fa-edit"></i>
                                             </a>
 
-                                                <button type="button" class="btn btn-default" data-roleid={{$role->id}} data-toggle="modal" data-target="#modal-delete">
+                                                <button type="button" class="btn btn-default" data-roleid={{$role->id}} data-rolename={{$role->name}} data-toggle="modal" data-target="#modal-delete">
                                                   <i class="fa fa-times"></i>
                                                 </button>
-                                              </form>
+                        
               
                                     </td>
                                     </tr>
@@ -107,10 +107,10 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="{{ route('backend.role.destroy', $role->id) }}" method="POST">
+          <form action="{{ route('backend.role.destroy', '1') }}" method="POST">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
-              <p>Do you really want to delete {{$role->name }} role ? </p> 
+              <p>Do you really want to delete <b id="role_name"></b> role ? </p> 
               <input type="hidden" name="role_id" id="role_id" value="">
             
         </div>
@@ -161,9 +161,12 @@
   
   $('#modal-delete').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget) 
-      var role_id = button.data('roleid') 
+      var role_id = button.data('roleid')
+      var role_name = button.data('rolename') 
       var modal = $(this)
       modal.find('.modal-body #role_id').val(role_id);
+      $('#role_name').html(role_name);
+      
 })
 </script>
 @endsection
