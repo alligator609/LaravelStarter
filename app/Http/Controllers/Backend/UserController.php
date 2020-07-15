@@ -61,7 +61,9 @@ class UserController extends BackendController
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $roles= Role::all(['id','display_name']);
+        return view("backend.users.edit",compact('user','roles'));
     }
 
     /**
@@ -73,7 +75,14 @@ class UserController extends BackendController
      */
     public function update(Request $request, $id)
     {
-        //
+         $user = User::findOrFail($id);
+        // $user->fill($request->all());
+        // $user->update();
+        $user->detachRoles();
+        $user->attachRole($request->role);
+
+        Toastr::success('User updated succesfully', 'Updated', ["positionClass" => "toast-top-right"]);
+        return redirect('/backend/user/');
     }
 
     /**

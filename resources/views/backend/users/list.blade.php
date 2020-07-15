@@ -57,7 +57,7 @@
 
             <tr>
                 <td>
-                    <a href="" class="btn btn-xs btn-default">
+                    <a href="{{ route('backend.user.edit', $user->id) }}" class="btn btn-xs btn-default">
                         <i class="fa fa-edit"></i>
                     </a>  
                     <a href="" class="btn btn-xs btn-danger">
