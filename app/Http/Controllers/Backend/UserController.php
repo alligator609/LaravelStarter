@@ -8,7 +8,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use App\User;
 use App\Role;
 
-class UserController extends Controller
+class UserController extends BackendController
 {
     /**
      * Display a listing of the resource.
