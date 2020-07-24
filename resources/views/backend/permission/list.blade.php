@@ -31,7 +31,7 @@
                           <div class="card-header">
                               <h3 class="card-title">PERMISSION LISTS</h3>
                               <div class="card-tools">
-                                <button type="button" data-toggle="modal" data-target="#modal-create" class="btn btn-block btn-primary btn-sm">Add new</button>                        
+                                <button type="button" data-toggle="modal" data-target="#modal-create" class="btn btn-block btn-primary btn-sm">Add new</button>
                                 </div>
                           </div>
                           <!-- /.card-header -->
@@ -64,30 +64,30 @@
                                       <td>{{$permission->display_name}}</td>
                                       <td>{{$permission->description}}</td>
                                       <td>
-                                        @foreach ($permission->roles as $item)                    
+                                        @foreach ($permission->roles as $item)
                                             {{ $loop->first ? '' : ', ' }}
                                             {{$item->name}}
-                                        @endforeach                             
-                                    
+                                        @endforeach
+
                                       </td>
                                       <td>
                                       <a href="{{route('backend.permission.edit',$permission->id)}}">
                                         <button type="button" class="btn btn-default">
-                                          <i class="fa fa-edit"></i>     
+                                          <i class="fa fa-edit"></i>
                                         </button>
                                       </a>
-                                                                
-  
+
+
                                           <button type="button" class="btn btn-default" data-permissionid="{{$permission->id}}" data-permissionname="{{$permission->name}}" data-toggle="modal" data-target="#modal-delete">
                                             <i class="fa fa-times"></i>
                                           </button>
                                       </td>
-                                      
-                
+
+
                                     </tr>
-                                        
+
                                     @endforeach
-                                    
+
                                     </tbody>
 
                               </table>
@@ -107,7 +107,7 @@
 
 
    {{-- modal create --}}
-  
+
    <div class="modal fade" id="modal-create">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -140,10 +140,10 @@
                       <option value="{{$role->id}}">{{$role->name}}</option>
                         @endforeach
                     </select>
-                    </div>      
+                    </div>
                   <!-- /.form-group -->
-                                                   
-       
+
+
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -157,9 +157,9 @@
   </div>
   <!-- /.modal -->
 
-  
+
    {{-- modal edit --}}
-  
+
    <div class="modal fade" id="modal-edit">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -190,25 +190,25 @@
                <div class="form-group select2-purple">
                     <label>Select Roles to access this permission</label>
                     <select required class="js-example-basic-multiple" name="roles[]" data-placeholder="Select a Role" multiple="multiple" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                      
+
                       <?php
                     $value = Request::cookie('displayname');
 
                       ?>
                     {{ cookie('displayname') }}
-                     @foreach($roles as $role)      
+                     @foreach($roles as $role)
                      @if($role->hasPermission( 'tsest'))
-                    <option value="{{$role->id}}" selected >{{$role->name}} {{Cookie::get('displayname')}}</option>    
+                    <option value="{{$role->id}}" selected >{{$role->name}} {{Cookie::get('displayname')}}</option>
                      @else
-                     <option value="{{$role->id}}" >{{$role->name}} {{ $value}}</option>  
+                     <option value="{{$role->id}}" >{{$role->name}} {{ $value}}</option>
                       @endif
                       @endforeach
                     </select>
                     {{ cookie('displayname') }}
-                    </div>      
+                    </div>
                   <!-- /.form-group -->
-                                                   
-       
+
+
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -222,7 +222,7 @@
   </div>
 
    {{-- modal delete --}}
-  
+
    <div class="modal fade" id="modal-delete">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -236,9 +236,9 @@
           <form action="{{ route('backend.permission.destroy', 'id') }}" method="POST">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
-              <p>Do you really want to delete <b id="permission_name"></b> permission? </p> 
+              <p>Do you really want to delete <b id="permission_name"></b> permission? </p>
               <input type="hidden" name="permission_id" id="permission_id" value="">
-            
+
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -291,13 +291,13 @@
 </script>
 <script>
 
-    
+
 $('#modal-edit').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget) 
-      var name = button.data('epermissionname') 
-      var description = button.data('epermissiondes') 
+      var button = $(event.relatedTarget)
+      var name = button.data('epermissionname')
+      var description = button.data('epermissiondes')
       var display_name = button.data('epermissiondisplayname')
-      var permission_id = button.data('epermissionid') 
+      var permission_id = button.data('epermissionid')
 
       var date = new Date();
         date.setTime(date.getTime()+(3*60*1000));
@@ -313,10 +313,10 @@ $('#modal-edit').on('show.bs.modal', function (event) {
       modal.find('.modal-body #1epermissionid').val(permission_id);
       $('#1epermissionnamedes').html(description);
 })
-  
+
   $('#modal-delete').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget) 
-      var permission_name = button.data('permissionname'); 
+      var button = $(event.relatedTarget)
+      var permission_name = button.data('permissionname');
       var permission_id = button.data('permissionid');
       console.log(permission_name);
       var modal = $(this)

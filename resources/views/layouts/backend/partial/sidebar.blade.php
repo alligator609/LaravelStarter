@@ -33,25 +33,30 @@
             </li>
         
         <li class="nav-header">Admin</li>
+        @if (check_user_permissions(request(), "Permission@index"))
         <li class="nav-item">
           <a href="{{route('backend.permission.index')}}" class="nav-link">
             <i class="nav-icon far fa-circle text-danger"></i>
             <p class="text">Permission</p>
           </a>
         </li>
+        @endif
+        @if (check_user_permissions(request(), "Role@index"))
         <li class="nav-item">
           <a href="{{route('backend.role.index')}}" class="nav-link">
             <i class="nav-icon far fa-circle text-warning"></i>
             <p>Roles</p>
           </a>
         </li>
+        @endif
+        @if (check_user_permissions(request(), "User@index"))
         <li class="nav-item">
           <a href="{{route('backend.user.index')}}" class="nav-link">
             <i class="nav-icon far fa-circle text-info"></i>
             <p>Users</p>
           </a>
         </li>
-        
+        @endif
         <li class="nav-header">Logout</li>
         <li class="nav-item">
           <a href="{{route('logout')}}" class="nav-link"

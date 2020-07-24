@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    Toastr::success('Messages in here', 'Title', ["positionClass" => "toast-top-right"]);
-
     return view('welcome');
 });
 
@@ -25,7 +23,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::get('/backend',function () {
-    Toastr::message('Messages in here', 'Title');
     return view('backend.dashboard');
 });
 
