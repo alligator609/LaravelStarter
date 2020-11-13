@@ -1,6 +1,8 @@
 @extends('layouts.backend.app')
 
 @section('content')
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
     <div class="container-fluid">
@@ -75,7 +77,7 @@
                 </a>
               </div>
             </div>
-            <div class="card-body table-responsive p-0">
+            <div class="card-body p-0">
               <table class="table table-striped table-valign-middle">
                 <thead>
                 <tr>
@@ -88,7 +90,7 @@
                 <tbody>
                 <tr>
                   <td>
-                    <img src="{{asset('assets/backend/dist/img/default-150x150.png')}}" alt="Product 1" class="img-circle img-size-32 mr-2">
+                    <img src="dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
                     Some Product
                   </td>
                   <td>$13 USD</td>
@@ -107,7 +109,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <img src="{{asset('assets/backend/dist/img/default-150x150.png')}}" alt="Product 1" class="img-circle img-size-32 mr-2">
+                    <img src="dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
                     Another Product
                   </td>
                   <td>$29 USD</td>
@@ -126,7 +128,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <img src="{{asset('assets/backend/dist/img/default-150x150.png')}}" alt="Product 1" class="img-circle img-size-32 mr-2">
+                    <img src="dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
                     Amazing Product
                   </td>
                   <td>$1,230 USD</td>
@@ -145,7 +147,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <img src="{{asset('assets/backend/dist/img/default-150x150.png')}}" alt="Product 1" class="img-circle img-size-32 mr-2">
+                    <img src="dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
                     Perfect Item
                     <span class="badge bg-danger">NEW</span>
                   </td>
@@ -269,4 +271,6 @@
     <!-- /.container-fluid -->
   </div>
   <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
 @endsection
