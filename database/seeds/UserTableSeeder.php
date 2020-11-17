@@ -15,7 +15,7 @@ class UserTableSeeder extends Seeder
     {
         $admin = User::create([
             'name' => 'Admin',
-            'email' => 'admin@azialab.com',
+            'email' => 'admin@techbucket.com',
             'password' => bcrypt('password')
              ]);
             $admin->attachRole('admin');

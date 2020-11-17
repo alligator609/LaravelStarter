@@ -20,11 +20,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+// google auth
+Route::get('auth/google', 'Auth\GoogleController@redirectToGoogle');
+Route::get('auth/google/callback', 'Auth\GoogleController@handleGoogleCallback');
 
-
-Route::get('/backend',function () {
-    return view('backend.dashboard');
-});
 
 
 Route::group(

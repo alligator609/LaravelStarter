@@ -61,7 +61,14 @@
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
-                                @endif
+                                @endif                        
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-8 offset-md-4">
+                                <a href="{{ url('auth/google') }}" style="margin-top: 20px;" class="btn btn-success">
+                                    <strong>Login With Google</strong>
+                                  </a> 
                             </div>
                         </div>
                     </form>
